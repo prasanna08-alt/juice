@@ -1,0 +1,111 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { font-family: 'Poppins', sans-serif; overflow: hidden; background: #111; }
+
+.app { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+.swiper { width: 100%; height: 100%; }
+.slide { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+/* top label */
+.tag { position: absolute; top: 18px; left: 0; right: 0; text-align: center; z-index: 5;
+  font-size: 13px; font-weight: 500; color: #1b1b2f; letter-spacing: .02em; }
+
+/* big word */
+.hero { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 1; }
+.hero-word { color: #fff; font-weight: 800; letter-spacing: -0.05em; line-height: 1.2;
+  font-size: clamp(110px, 20vw, 320px); padding: 0 .05em; white-space: nowrap; }
+.ch { display: inline-block; }
+
+/* fruits */
+.fruit { --s: clamp(64px, 8.5vw, 130px); position: absolute; z-index: 2; width: var(--s); margin-left: calc(var(--s) / -2); }
+.fruit img { width: 100%; display: block; animation: floatFruit 4.5s ease-in-out infinite alternate; filter: drop-shadow(0 10px 8px rgba(0,0,0,.18)); }
+.fruit-shadow { display: block; width: 60%; height: 8px; margin: 14px auto 0; border-radius: 50%; background: rgba(0,0,0,.22); filter: blur(5px); }
+.f-tl { left: 24%; top: 14%; }
+.f-tr { left: 76%; top: 14%; transform-origin: center; }
+.f-bl { left: 10%; top: 66%; }
+.f-br { left: 90%; top: 66%; }
+
+/* ---------- your sample CSS ---------- */
+.bottle-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 1000px;
+  width: 400px;
+  pointer-events: auto;
+  cursor: pointer;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+.main-bottle-img {
+  max-height: 520px;
+  width: auto;
+  object-fit: contain;
+  transform-origin: center;
+  filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.25));
+  animation: floatBottle 6s ease-in-out infinite alternate;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+@keyframes floatBottle {
+  from { transform: translateY(0) rotate(-1deg); }
+  to   { transform: translateY(-18px) rotate(1deg); }
+}
+/* ------------------------------------- */
+.bottle-anim { transform-style: preserve-3d; display: flex; justify-content: center; }
+@keyframes floatFruit { from { transform: translateY(0) rotate(-4deg); } to { transform: translateY(-12px) rotate(5deg); } }
+
+@media (max-height: 700px) { .main-bottle-img { max-height: 58vh; } }
+@media (max-width: 700px) { .main-bottle-img { max-height: 46vh; } .bottle-wrap { width: 220px; } }
+
+/* order button */
+.order-wrap { position: absolute; bottom: 28px; left: 0; right: 0; display: flex; justify-content: center; z-index: 6; }
+.order-btn { border: 0; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 600;
+  padding: 7px 22px; border-radius: 999px; background: rgba(255,255,255,.75); }
+
+/* arrows */
+.nav-btn { position: absolute; top: 50%; z-index: 20; width: 22px; height: 22px; margin-top: -11px; border-radius: 50%;
+  border: 0; background: rgba(255,255,255,.7); color: #222; font-size: 16px; line-height: 20px; cursor: pointer; transition: transform .2s; }
+.nav-btn:hover { transform: scale(1.2); }
+.prev { left: 8px; } .next { right: 8px; }
+
+/* ---------- modal ---------- */
+.modal-backdrop { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+  background: rgba(40, 24, 12, .6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 20px; }
+.modal-card { position: relative; width: min(790px, 100%); background: #1b2038; border-radius: 30px; padding: 40px;
+  display: grid; grid-template-columns: 0.8fr 1.4fr; gap: 30px; box-shadow: 0 30px 80px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.04); }
+.modal-close { position: absolute; top: 24px; right: 24px; width: 38px; height: 38px; border-radius: 50%; border: 0;
+  background: #2c3350; color: #c9cde4; display: grid; place-items: center; cursor: pointer; }
+.modal-media { display: flex; align-items: center; justify-content: center; }
+.modal-media img { max-height: 290px; width: auto; filter: drop-shadow(0 20px 20px rgba(0,0,0,.4)); }
+.modal-info h2 { color: #fff; font-size: 36px; font-weight: 700; line-height: 1.15; padding-right: 50px; }
+.modal-sub { color: #9aa0bd; font-size: 16px; margin: 6px 0 22px; }
+.modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; background: #232a42; border-radius: 16px; padding: 18px 10px; }
+.modal-stats span { display: block; font-size: 12px; color: #8f95b3; letter-spacing: .04em; margin-bottom: 6px; }
+.modal-stats b { color: #fff; font-size: 17px; font-weight: 700; }
+.modal-label { color: #8f95b3; font-size: 12.5px; letter-spacing: .04em; margin: 22px 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: #2c3350; color: #cfd3ea; border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+.confirm-btn { width: 100%; margin-top: 26px; border: 0; cursor: pointer; padding: 16px; border-radius: 16px; color: #fff;
+  font-family: Arial, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: .01em;
+  background: linear-gradient(90deg, #ff7e67, #ffb27a); box-shadow: 0 10px 30px rgba(255,126,103,.35); transition: background .3s; }
+.confirm-btn.done { background: linear-gradient(90deg, #3ec28f, #78e0b4); box-shadow: 0 10px 30px rgba(62,194,143,.35); }
+
+@media (max-width: 680px) {
+  .modal-card { grid-template-columns: 1fr; padding: 28px 22px; max-height: 92vh; overflow-y: auto; }
+  .modal-media img { max-height: 190px; }
+  .modal-info h2 { font-size: 28px; }
+}
+
+/* FIX: inactive (hidden) slides must not catch clicks — their tall .bottle-wrap was sitting on top of the Order button */
+.swiper-slide:not(.swiper-slide-active),
+.swiper-slide:not(.swiper-slide-active) * { pointer-events: none !important; }
+.order-wrap { pointer-events: none; }
+.order-btn { pointer-events: auto; }
